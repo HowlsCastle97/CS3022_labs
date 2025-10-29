@@ -29,13 +29,17 @@ int main() {
 
     // Error #1 fix: initialize pointer; comment out the bad deref
     AnimalUtil::Animal* mysteryAnimal = nullptr;
-    // std::cout << "The animal is initialized to: "
-    //           << AnimalUtil::toStr(*mysteryAnimal) << "\n";
+    /*
+    std::cout << "The animal is initialized to: "
+              << AnimalUtil::toStr(*mysteryAnimal) << "\n";
+    */
 
     // Error #2 fix: comment out the null deref
     mysteryAnimal = nullptr;
-    // std::cout << "The animal should initally be nothing: "
-    //           << AnimalUtil::toStr(*mysteryAnimal) << "\n";
+    /*
+    std::cout << "The animal should initally be nothing: "
+              << AnimalUtil::toStr(*mysteryAnimal) << "\n";
+    */
 
     while (true) {
         // Error #3 fix: prevent leak before creating a new animal each round
