@@ -28,11 +28,15 @@ int main() {
     std::cout << "Guess the Animal! (1: Dog, 2: Cat, 3: Bird, 4: Fish)\n";
     std::cout << "Enter 0 to quit.\n";
 
-    // Pointer starts safe (keeps the lab’s pointer semantics)
+    // ERROR #1: pointer must be initialized
     AnimalUtil::Animal* mysteryAnimal = nullptr;
+    // removed bad dereference
+
+    // ERROR #2: removed nullptr dereference
+    // (original code attempted to print *mysteryAnimal here)
 
     while (true) {
-        // Fix for error #3: free old before new (no leak)
+        // ERROR #3: delete old allocation before new one
         delete mysteryAnimal;
         mysteryAnimal =
             new AnimalUtil::Animal(static_cast<AnimalUtil::Animal>(1 + std::rand() % 4));
@@ -40,10 +44,12 @@ int main() {
         std::cout << "\nYour guess: ";
 
         int guess = -1;
+
+        // handle non-numeric input
         if (!(std::cin >> guess)) {
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "Invalid input; try again.\n";
+            std::cout << "Invalid input; please enter 1, 2, 3, 4, or 0.\n";
             continue;
         }
 
@@ -52,9 +58,9 @@ int main() {
             break;
         }
 
-        // Only allow 1–4 (or 0 to quit)
+        // reject invalid numbers
         if (guess < 1 || guess > 4) {
-            std::cout << "Please enter 1, 2, 3, or 4 (or 0 to quit).\n";
+            std::cout << "Please enter 1, 2, 3, 4, or 0.\n";
             continue;
         }
 
