@@ -32,11 +32,10 @@ int main() {
     AnimalUtil::Animal* mysteryAnimal;
 
     // Error #1 - see question #1
-    std::cout << "The animal is initialized to: " << AnimalUtil::toStr(*mysteryAnimal) << "\n";
+
     
     // Error #2 - see question #2
     mysteryAnimal = nullptr;
-    std::cout << "The animal should initally be nothing: " << AnimalUtil::toStr(*mysteryAnimal) << "\n";
     
     // Error #3 - Figure it out. The error assumes good user behavior. 
     // It has nothing to do with validation checking.
