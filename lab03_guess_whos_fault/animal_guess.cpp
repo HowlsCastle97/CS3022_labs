@@ -2,6 +2,10 @@
 #include <cstdlib>
 #include <ctime>
 #include <limits>
+#include <string>
+
+// Toggle this to 0 to silence the debug/diagram prints for your final run
+#define SHOW_DIAGNOSTICS 1
 
 class AnimalUtil {
 public:
@@ -27,6 +31,12 @@ int main() {
     std::cout << "Guess the Animal! (1: Dog, 2: Cat, 3: Bird, 4: Fish)\n";
     std::cout << "Enter 0 to quit.\n";
 
+#if SHOW_DIAGNOSTICS
+    // Q4: Print where the static storage lives (address of first char in the string)
+    std::cout << "[diag] &staticWelcomeMessage[0]: "
+              << static_cast<const void*>(&staticWelcomeMessage[0]) << "\n";
+#endif
+
     // Error #1 fix: initialize pointer; comment out the bad deref
     AnimalUtil::Animal* mysteryAnimal = nullptr;
     /*
@@ -47,6 +57,17 @@ int main() {
         mysteryAnimal =
             new AnimalUtil::Animal(static_cast<AnimalUtil::Animal>(1 + std::rand() % 4));
 
+#if SHOW_DIAGNOSTICS
+        // Q3 diagnostics: show the three memory items each round
+        std::cout << "[diag] &mysteryAnimal (address of pointer var on stack): "
+                  << static_cast<const void*>(&mysteryAnimal) << "\n";
+        std::cout << "[diag] mysteryAnimal (address pointer points to on heap): "
+                  << static_cast<const void*>(mysteryAnimal) << "\n";
+        std::cout << "[diag] *mysteryAnimal (enum value at that heap address): "
+                  << static_cast<int>(*mysteryAnimal) << " -> "
+                  << AnimalUtil::toStr(*mysteryAnimal) << "\n";
+#endif
+
         std::cout << "\nYour guess: ";
 
         int guess = -1;
@@ -63,7 +84,7 @@ int main() {
             break;
         }
 
-        // Validation, no other entries than 0,1,2,3,4 allowed!
+        // Range validation: only 1,2,3,4 allowed (or 0 to quit)
         if (guess < 1 || guess > 4) {
             std::cout << "Please enter 1, 2, 3, or 4 (or 0 to quit).\n";
             continue;
