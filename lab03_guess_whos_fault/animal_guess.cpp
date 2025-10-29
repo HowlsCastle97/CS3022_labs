@@ -31,7 +31,7 @@ int main() {
     // ERROR #1: pointer must be initialized (removed bad deref)
     AnimalUtil::Animal* mysteryAnimal = nullptr;
 
-    // ERROR #2: removed nullptr dereference that printed *mysteryAnimal
+    // ERROR #2: removed nullptr dereference
 
     while (true) {
         // ERROR #3: delete old allocation before new one (no leak)
@@ -42,7 +42,6 @@ int main() {
         std::cout << "\nYour guess: ";
 
         int guess = -1;
-        // non-numeric input
         if (!(std::cin >> guess)) {
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -50,19 +49,25 @@ int main() {
             continue;
         }
 
-        // exit
         if (guess == 0) {
             std::cout << "Bye!\n";
             break;
         }
 
-        // range check
         if (guess < 1 || guess > 4) {
             std::cout << "Please enter 1, 2, 3, 4, or 0.\n";
             continue;
         }
 
-        // compare only for valid guesses
+        // Temporary Code for #Q3
+        std::cout << "[DEBUG] Pointer variable address (&mysteryAnimal): "
+                  << &mysteryAnimal << "\n";
+        std::cout << "[DEBUG] Heap address stored in pointer (mysteryAnimal): "
+                  << mysteryAnimal << "\n";
+        std::cout << "[DEBUG] Value at heap address (*mysteryAnimal): "
+                  << static_cast<int>(*mysteryAnimal) << " -> "
+                  << AnimalUtil::toStr(*mysteryAnimal) << "\n";
+
         if (*mysteryAnimal == static_cast<AnimalUtil::Animal>(guess)) {
             std::cout << "Correct! It was " << AnimalUtil::toStr(*mysteryAnimal) << "\n";
         } else {
