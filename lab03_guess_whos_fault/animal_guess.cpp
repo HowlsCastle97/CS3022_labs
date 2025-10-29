@@ -28,6 +28,9 @@ int main() {
     std::cout << "Guess the Animal! (1: Dog, 2: Cat, 3: Bird, 4: Fish)\n";
     std::cout << "Enter 0 to quit.\n";
 
+    std::cout << "[DEBUG] staticWelcomeMessage address: "
+          << static_cast<const void*>(staticWelcomeMessage.c_str()) << "\n";
+
     // ERROR #1: pointer must be initialized (removed bad deref)
     AnimalUtil::Animal* mysteryAnimal = nullptr;
     // ERROR #2: removed nullptr dereference
