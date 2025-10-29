@@ -24,12 +24,11 @@ const std::string staticWelcomeMessage = "Welcome to the Animal Guesser!";
 int main() {
     std::srand(static_cast<unsigned>(std::time(nullptr)));
 
-    std::cout << "[build] Animal Guesser BUILD=7A\n";           // build banner
     std::cout << staticWelcomeMessage << "\n";
     std::cout << "Guess the Animal! (1: Dog, 2: Cat, 3: Bird, 4: Fish)\n";
     std::cout << "Enter 0 to quit.\n";
 
-    // Pointer starts safe
+    // Pointer starts safe (keeps the lab’s pointer semantics)
     AnimalUtil::Animal* mysteryAnimal = nullptr;
 
     while (true) {
@@ -53,7 +52,7 @@ int main() {
             break;
         }
 
-        // Range validation
+        // Only allow 1–4 (or 0 to quit)
         if (guess < 1 || guess > 4) {
             std::cout << "Please enter 1, 2, 3, or 4 (or 0 to quit).\n";
             continue;
