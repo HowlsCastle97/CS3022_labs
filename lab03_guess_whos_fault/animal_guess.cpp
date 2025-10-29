@@ -30,7 +30,6 @@ int main() {
 
     // ERROR #1: pointer must be initialized (removed bad deref)
     AnimalUtil::Animal* mysteryAnimal = nullptr;
-
     // ERROR #2: removed nullptr dereference
 
     while (true) {
@@ -59,14 +58,15 @@ int main() {
             continue;
         }
 
-        // Temporary Code for #Q3
-        std::cout << "[DEBUG] Pointer variable address (&mysteryAnimal): "
+        // ----- Q3 TEMP DEBUG -----
+        std::cout << "[DEBUG] &mysteryAnimal (address of pointer var on stack): "
                   << &mysteryAnimal << "\n";
-        std::cout << "[DEBUG] Heap address stored in pointer (mysteryAnimal): "
+        std::cout << "[DEBUG] mysteryAnimal (heap address stored in pointer): "
                   << mysteryAnimal << "\n";
-        std::cout << "[DEBUG] Value at heap address (*mysteryAnimal): "
+        std::cout << "[DEBUG] *mysteryAnimal (enum value at heap address): "
                   << static_cast<int>(*mysteryAnimal) << " -> "
                   << AnimalUtil::toStr(*mysteryAnimal) << "\n";
+        // -------------------------
 
         if (*mysteryAnimal == static_cast<AnimalUtil::Animal>(guess)) {
             std::cout << "Correct! It was " << AnimalUtil::toStr(*mysteryAnimal) << "\n";
